@@ -1,0 +1,24 @@
+[package]
+name = "@mysol/mint"
+version = "1.0.0"
+description = "Created with Anchor"
+edition = "2022"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+mint_nft = "mysol_mint_nft"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+
+[profile.release]
+overflow-checks = true
+
+[dependencies]
+anchor-lang = "0.24.2"
+mpl-token-metadata = { version="1.2.5", features = [ "no-entrypoint" ] }
+anchor-spl = "0.24.2"
