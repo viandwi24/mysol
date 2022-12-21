@@ -1,0 +1,44 @@
+Arguments: 
+  /home/viandwi24/.nvm/versions/node/v16.16.0/bin/node /home/viandwi24/.nvm/versions/node/v16.16.0/bin/yarn
+
+PATH: 
+  /home/viandwi24/.gvm/bin:/home/viandwi24/.local/share/pnpm:/home/viandwi24/.autojump/bin:/home/viandwi24/.nvm/versions/node/v16.16.0/bin:/home/viandwi24/.local/share/solana/install/active_release/bin:/home/viandwi24/.avm/bin:/home/viandwi24/.yarn/bin:/home/viandwi24/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files (x86)/dotnet/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Cloudflare/Cloudflare WARP/:/mnt/c/Program Files (x86)/ZeroTier/One/:/mnt/c/Users/viand/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/viand/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/viand/AppData/Local/JetBrains/Toolbox/scripts:/mnt/c/Users/viand/.dotnet/tools:/usr/lib/jvm/java-11-openjdk-amd64/bin:/home/viandwi24/Scripts/Android/Sdk/cmdline-tools/latest/bin:/home/viandwi24/Scripts/Android/Sdk/platform-tools:/home/viandwi24/Scripts/flutter/bin:/usr/local/go/bin:/home/viandwi24/.deno/bin:/home/viandwi24/.oh-my-zsh/custom/plugins/fzf-zsh-plugin/bin:/home/viandwi24/.fzf/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.16.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile '/home/viandwi24/.cache/yarn/v6/npm-bs58-5.0.0-865575b4d13c09ea2a84622df6c8cbeb54ffc279-integrity/node_modules/bs58/CHANGELOG.md' -> '/home/viandwi24/Project/Learn/mysol/node_modules/@metaplex-foundation/js/node_modules/bs58/CHANGELOG.md'
+
+npm manifest: 
+  {
+      "scripts": {
+          "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
+          "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
+      },
+      "dependencies": {
+          "@project-serum/anchor": "^0.25.0"
+      },
+      "devDependencies": {
+          "chai": "^4.3.4",
+          "mocha": "^9.0.3",
+          "ts-mocha": "^10.0.0",
+          "@types/bn.js": "^5.1.0",
+          "@types/chai": "^4.3.0",
+          "@types/mocha": "^9.0.0",
+          "typescript": "^4.3.5",
+          "prettier": "^2.6.2"
+      }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

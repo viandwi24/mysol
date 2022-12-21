@@ -5,7 +5,14 @@ my repo for learning solana, anchor & metaplex
 - https://docs.solana.com/cli/install-solana-cli-tools
 - https://book.anchor-lang.com/getting_started/installation.html
 
-## TEST
+# TEST
+## Test 1
+### Setup
+```bash
+solana config set --keypair ./configs/keypairs/u1.json --url https://api.devnet.solana.com
+```
+
+## Test 2
 ### Test Mint
 ```
 PROGRAM ID:

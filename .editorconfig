@@ -14,3 +14,4 @@ insert_final_newline = false
 
 [*.rs]
 insert_final_newline = false
+indent_size = 4

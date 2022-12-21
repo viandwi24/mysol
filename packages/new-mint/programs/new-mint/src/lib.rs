@@ -4,13 +4,14 @@ use {
     mpl_token_metadata::{instruction as token_instruction, ID as TOKEN_METADATA_ID},
 };
 
-declare_id!("7b8Heiw5c2dTcfQQwGELahjaGhGyRVHiMiXpSX3o5vMB");
+declare_id!("2VtTTJyAVt8GCi6eDPNGpAa42XaWrB6bDtfA8srcRxJ6");
 
 #[program]
-pub mod mint_nft {
+pub mod new_mint {
+
     use super::*;
 
-    pub fn mint(
+    pub fn mint_nft(
         ctx: Context<MintNft>,
         metadata_title: String,
         metadata_symbol: String,
@@ -22,7 +23,7 @@ pub mod mint_nft {
             CpiContext::new(
                 ctx.accounts.token_program.to_account_info(),
                 system_program::CreateAccount {
-                    from: ctx.accounts.mint_authority.to_account_info(),
+                    from: ctx.accounts.payer.to_account_info(),
                     to: ctx.accounts.mint.to_account_info(),
                 },
             ),
@@ -42,7 +43,7 @@ pub mod mint_nft {
                 },
             ),
             0,
-            &ctx.accounts.mint_authority.key(),
+            &ctx.accounts.payer.key(),
             Some(&ctx.accounts.mint_authority.key()),
         )?;
 
@@ -51,9 +52,9 @@ pub mod mint_nft {
         associated_token::create(CpiContext::new(
             ctx.accounts.associated_token_program.to_account_info(),
             associated_token::Create {
-                payer: ctx.accounts.mint_authority.to_account_info(),
+                payer: ctx.accounts.payer.to_account_info(),
                 associated_token: ctx.accounts.token_account.to_account_info(),
-                authority: ctx.accounts.mint_authority.to_account_info(),
+                authority: ctx.accounts.payer.to_account_info(),
                 mint: ctx.accounts.mint.to_account_info(),
                 system_program: ctx.accounts.system_program.to_account_info(),
                 token_program: ctx.accounts.token_program.to_account_info(),
@@ -70,7 +71,7 @@ pub mod mint_nft {
                 token::MintTo {
                     mint: ctx.accounts.mint.to_account_info(),
                     to: ctx.accounts.token_account.to_account_info(),
-                    authority: ctx.accounts.mint_authority.to_account_info(),
+                    authority: ctx.accounts.payer.to_account_info(),
                 },
             ),
             1,
@@ -83,27 +84,28 @@ pub mod mint_nft {
         );
         invoke(
             &token_instruction::create_metadata_accounts_v3(
-              TOKEN_METADATA_ID,
-              ctx.accounts.metadata.key(),
-              ctx.accounts.mint.key(),
-              ctx.accounts.mint_authority.key(),
-              ctx.accounts.mint_authority.key(),
-              ctx.accounts.mint_authority.key(),
-              metadata_title,
-              metadata_symbol,
-              metadata_uri,
-              None,
-              1,
-              true,
-              false,
-              None,
-              None,
-              None,
+                TOKEN_METADATA_ID,
+                ctx.accounts.metadata.key(),
+                ctx.accounts.mint.key(),
+                ctx.accounts.payer.key(),
+                ctx.accounts.payer.key(),
+                ctx.accounts.mint_authority.key(),
+                metadata_title,
+                metadata_symbol,
+                metadata_uri,
+                None,
+                1,
+                true,
+                false,
+                None,
+                None,
+                None,
             ),
             &[
                 ctx.accounts.metadata.to_account_info(),
                 ctx.accounts.mint.to_account_info(),
                 ctx.accounts.token_account.to_account_info(),
+                ctx.accounts.payer.to_account_info(),
                 ctx.accounts.mint_authority.to_account_info(),
                 ctx.accounts.rent.to_account_info(),
             ],
@@ -119,10 +121,10 @@ pub mod mint_nft {
                 TOKEN_METADATA_ID,
                 ctx.accounts.master_edition.key(),
                 ctx.accounts.mint.key(),
-                ctx.accounts.mint_authority.key(),
-                ctx.accounts.mint_authority.key(),
+                ctx.accounts.payer.key(),
+                ctx.accounts.payer.key(),
                 ctx.accounts.metadata.key(),
-                ctx.accounts.mint_authority.key(),
+                ctx.accounts.payer.key(),
                 Some(0),
             ),
             &[
@@ -131,6 +133,7 @@ pub mod mint_nft {
                 ctx.accounts.mint.to_account_info(),
                 ctx.accounts.token_account.to_account_info(),
                 ctx.accounts.mint_authority.to_account_info(),
+                ctx.accounts.payer.to_account_info(),
                 ctx.accounts.rent.to_account_info(),
             ],
         )?;
@@ -156,6 +159,8 @@ pub struct MintNft<'info> {
     pub token_account: UncheckedAccount<'info>,
     #[account(mut)]
     pub mint_authority: Signer<'info>,
+    #[account(mut)]
+    pub payer: Signer<'info>,
     pub rent: Sysvar<'info, Rent>,
     pub system_program: Program<'info, System>,
     pub token_program: Program<'info, token::Token>,
